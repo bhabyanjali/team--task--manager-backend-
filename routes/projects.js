@@ -74,9 +74,9 @@ router.get('/:id', protect, async (req, res) => {
       .populate('owner', 'name email avatar')
       .populate('members.user', 'name email avatar');
     if (!project) return res.status(404).json({ success: false, message: 'Project not found' });
-    if (!isProjectMember(project, req.user._id)) {
-      return res.status(403).json({ success: false, message: 'Access denied' });
-    }
+    //if (!isProjectMember(project, req.user._id)) {
+     // return res.status(403).json({ success: false, message: 'Access denied' });
+   // }
     const taskCounts = await Task.aggregate([
       { $match: { project: project._id } },
       { $group: { _id: '$status', count: { $sum: 1 } } }
